@@ -24,3 +24,27 @@ module.exports.registerUser = async(req,res,next)=>{
 
     res.status(201).json({token, user})
 }
+
+module.exports.loginUser = async(req, res, next)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()});
+    }
+    const {email, password} = req.body;
+
+    const user = await userModel.findOne({email}).select('+password');
+
+    if(!user ||!(await user.comparePassword(password))){
+        return res.status(401).json({error: 'Invalid credentials'});
+    }
+
+    const token = user.generateAuthToken();
+
+    res.status(200).json({token, user})
+}
+
+module.exports.getUserProfile = async(req,res,next)=>{
+    //created a auth.middleware.js file for this route to see who the user is and is it authorized? 
+    // console.log('Inside user controller');
+    res.status(200).json(req.user);
+}
