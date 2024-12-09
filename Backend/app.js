@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 const cors = require('cors');
 const connectToDb = require('./db/db');
 const userRoutes = require('./routes/user.routes');
+const captainRoutes = require('./routes/captain.routes');
 const cookieParser = require('cookie-parser')
 
 //load env variables fro the .env file
@@ -23,5 +24,6 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/users',userRoutes);
+app.use('/captains',captainRoutes);
 
 module.exports = app;
