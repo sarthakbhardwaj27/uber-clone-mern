@@ -40,6 +40,9 @@ module.exports.loginUser = async(req, res, next)=>{
 
     const token = user.generateAuthToken();
 
+    //for handling auth middleware with cookies
+    res.cookie('token',token)
+
     res.status(200).json({token, user})
 }
 
