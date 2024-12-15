@@ -12,8 +12,10 @@ const UserSignup = () => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		setUserData({
-			firstName: firstName,
-			lastName: lastName,
+			fullName: {
+				firstName: firstName,
+				lastName: lastName,
+			},
 			email: email,
 			password: password,
 		});
@@ -75,7 +77,7 @@ const UserSignup = () => {
 						placeholder="password"
 					/>
 					<button className="bg-black text-white mb-3 rounded px-4 py-2 w-full text-lg">
-						Login
+						Create Account
 					</button>
 				</form>
 				<p className="text-center ">
